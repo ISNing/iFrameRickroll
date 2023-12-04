@@ -58,10 +58,10 @@
     const w = getQueryString('w') + '==';
 
     if (w) {
-        w = JSON.parse(b64_to_utf8(w));
+        const wo = JSON.parse(b64_to_utf8(w));
 
-        const target_url = w.target;
-        const iframe_url = w.iframe;
+        const target_url = wo.target;
+        const iframe_url = wo.iframe;
     } else {
         const target_url = getQueryString('target');
         const iframe_url = getQueryString('iframe');
