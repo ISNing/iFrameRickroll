@@ -56,15 +56,17 @@
     }
 
     const w = getQueryString('w') + '==';
+    let target_url = null;
+    let iframe_url = null;
 
     if (w) {
         const wo = JSON.parse(b64_to_utf8(w));
 
-        const target_url = wo.target;
-        const iframe_url = wo.iframe;
+        target_url = wo.target;
+        iframe_url = wo.iframe;
     } else {
-        const target_url = getQueryString('target');
-        const iframe_url = getQueryString('iframe');
+        target_url = getQueryString('target');
+        iframe_url = getQueryString('iframe');
     }
 
 
