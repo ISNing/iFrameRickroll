@@ -58,10 +58,10 @@
     const w = document.getElementById('w') + '==';
 
     if (w) {
-        w = JSON.parse(w);
+        w = JSON.parse(b64_to_utf8(w));
 
-        const target_url = utf8_to_b64(w).target;
-        const iframe_url = utf8_to_b64(w).iframe;
+        const target_url = w.target;
+        const iframe_url = w.iframe;
     } else {
         const target_url = getQueryString('target');
         const iframe_url = getQueryString('iframe');
