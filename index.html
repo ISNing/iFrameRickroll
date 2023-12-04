@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        #iframe {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <iframe id="iframe" style="height: 100%; width: 100%;" scrolling="no" border="0" frameborder="no"
+            framespacing="0" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+</body>
+
+<script>
+    function utf8_to_b64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+    }
+
+    function b64_to_utf8(str) {
+        return decodeURIComponent(escape(window.atob(str)));
+    }
+
+    function getQueryString(name) {
+        const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+        const r = window.location.search.substring(1).match(reg)
+        if (r != null) return decodeURI(r[2]);
+        return null
+    }
+
+    const w = document.getElementById('w') + '==';
+
+    if (w) {
+        w = JSON.parse(w);
+
+        const target_url = utf8_to_b64(w).target;
+        const iframe_url = utf8_to_b64(w).iframe;
+    } else {
+        const target_url = getQueryString('target');
+        const iframe_url = getQueryString('iframe');
+    }
+
+
+    if (self == top) {
+        window.location.href = target_url
+    }
+
+    var container = document.getElementById('container');
+    var iframe = document.getElementById('iframe');
+    iframe.setAttribute('src', iframe_url)
+    container.addEventListener('click', function () {
+        window.location.href = target_url
+    })
+</script>
+
+</html>
