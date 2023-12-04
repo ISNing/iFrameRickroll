@@ -55,7 +55,7 @@
         return null
     }
 
-    const w = document.getElementById('w') + '==';
+    const w = getQueryString('w') + '==';
 
     if (w) {
         w = JSON.parse(b64_to_utf8(w));
